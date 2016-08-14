@@ -32,7 +32,11 @@ class PiPortInterface:
     def isOn(self, port):
         return (GPIO.input(port))
 
-    def allPortsOff(self):
+    def allOn(self):
+        for port in self.ports:
+            self.portOn(port)
+
+    def allOff(self):
         for port in self.ports:
             self.portOff(port)
 
