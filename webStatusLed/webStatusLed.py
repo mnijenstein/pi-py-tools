@@ -16,9 +16,13 @@ print("WebStatusLed")
 print("*" * 20)
 
 pc = ppi.PiPortInterface()
-pc.portOn(36)#b
-pc.portOn(37)#g
-pc.portOn(38)#r
+red = 36
+blue = 38
+green = 40
+
+pc.portOn(blue)
+pc.portOn(green)
+pc.portOn(red)
 
 print("Press crtl-c to quit...")
 
@@ -30,12 +34,22 @@ try:
         value_at = contents.find('waarde')
         value = contents[value_at+offset]
 
-        if value == "1":
-            pc.portOn(37)
-            pc.portOff(38)
+        if value == "0":
+            pc.portOn(red)
+            pc.portOn(blue)
+            pc.portOff(green)
+        elif value == "1":
+            pc.portOn(green)
+            pc.portOn(blue)
+            pc.portOff(red)
+        elif value == "2":
+            pc.portOn(red)
+            pc.portOn(green)
+            pc.portOff(blue)
         else:
-            pc.portOn(38)
-            pc.portOff(37)
+            pc.portOn(blue)
+            pc.portOn(green)
+            pc.portOn(red)
         time.sleep(5)
 
 except KeyboardInterrupt:
